@@ -1,0 +1,132 @@
+/* General Body/Container */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #f4f4f4;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Game Board (#game-board) */
+#game-board {
+    display: grid;
+    grid-template-columns: repeat(7, 40px);
+    grid-template-rows: repeat(7, 40px);
+    border: 2px solid #333;
+    padding: 5px; /* Similar to board_padding */
+    background-color: #c0c0c0; /* A neutral background for the board area */
+    margin-bottom: 20px;
+}
+
+/* Cells (.cell) */
+.cell {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #a0a0a0;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e0e0e0; /* Default background for valid, non-peg, non-empty cells */
+}
+
+/* Off-board Cells (.off-board) */
+.off-board {
+    background-color: #f0f0f0; /* Lighter grey for disabled/different appearance */
+    border: 1px solid #d0d0d0; /* Slightly lighter border */
+}
+
+/* Pegs (.peg) - applied to the cell div itself */
+.cell.peg {
+    background-color: black; /* Peg color */
+    border-radius: 50%; /* Makes the cell background circular */
+    /* To make the "peg" appear slightly smaller than the cell,
+       we can use a pseudo-element or adjust the size of an inner element.
+       Here, we'll style the cell itself to be the peg, and ensure it's centered.
+       The flex properties on .cell already handle centering if we reduce width/height.
+       However, it's simpler to change the background and add a visual cue if needed.
+       Let's assume the background-color and border-radius are enough to represent the peg.
+       If a smaller peg is desired, an inner div/span or :after/:before pseudo-element is better.
+       For simplicity, we'll make the peg occupy the visual center of the cell.
+       A box-shadow can give it a bit of depth.
+    */
+    box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.3), 0 0 5px rgba(0,0,0,0.5);
+}
+
+/* Selected Pegs (.selected-peg) */
+.cell.peg.selected-peg {
+    background-color: red; /* Selected peg color */
+}
+
+/* Empty Slots (.empty) */
+.cell.empty {
+    background-color: #d0d0d0; /* Darker than default, lighter than off-board */
+    /* Optional: add a visual cue for empty slot, e.g., a subtle inner circle */
+}
+
+.cell.empty::after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background-color: #b0b0b0; /* Darker small circle for empty slot */
+    border-radius: 50%;
+}
+
+
+/* Controls Area */
+.controls {
+    display: flex;
+    gap: 10px; /* Spacing between buttons */
+    margin-bottom: 15px;
+}
+
+/* Buttons */
+.controls button {
+    padding: 8px 15px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #e9e9e9;
+    cursor: pointer;
+}
+
+.controls button:hover {
+    background-color: #ddd;
+}
+
+/* Move History (#move-history) */
+.move-history-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+.move-history-container label {
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+#move-history {
+    width: 90%; /* Relative to its container */
+    max-width: 280px; /* Match board width */
+    height: 100px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical; /* Allow vertical resize */
+    font-family: monospace;
+    font-size: 12px;
+    background-color: #f9f9f9;
+}
